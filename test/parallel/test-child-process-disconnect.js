@@ -93,9 +93,9 @@ if (process.argv[2] === 'child') {
         // ready to be disconnected
         if (data === 'ready') {
           child.disconnect();
-          assert.throws(
-            child.disconnect.bind(child),
-            {
+          common.expectsError( () => {
+            child.disconnect.bind(child);
+            }, {
               code: 'ERR_IPC_DISCONNECTED'
             });
           return;
